@@ -1,39 +1,34 @@
 import { test, expect } from "@playwright/test";
-import { NavigationPage } from "../pages/navigationPage";
-import { FormLayoutsPage } from "../pages/formLayoutsPage";
-import { DatePickerPage } from "../pages/datePickerPage";
+import { PageManager } from "../pages/pageManager";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:4200");
 });
 
 test("navigate to Form Layout", async ({ page }) => {
-  const navigateTo = new NavigationPage(page);
-  await navigateTo.FormLayoutsPage();
-  await navigateTo.datePickerPage();
-  await navigateTo.smartTablePage();
-  await navigateTo.toastrPage();
-  await navigateTo.tooltipPage();
+  const pm = new PageManager(page);
+  await pm.navigateTo().FormLayoutsPage();
+  await pm.navigateTo().datePickerPage();
+  await pm.navigateTo().smartTablePage();
+  await pm.navigateTo().toastrPage();
+  await pm.navigateTo().tooltipPage();
 });
 
 test("method parameterized", async ({ page }) => {
-  const formLayoutsPage = new FormLayoutsPage(page);
-  const navigateTo = new NavigationPage(page);
-  const onDatePickerPage = new DatePickerPage(page);
+  const pm = new PageManager(page);
+  await pm.navigateTo().FormLayoutsPage();
+  await pm
+    .onFormLayoutsPage()
+    .inputFormUsingGridsWithCredentials(
+      "test@gamil.com",
+      "myPassword",
+      "Option 1"
+    );
+  await pm
+    .onFormLayoutsPage()
+    .inputFormUsingInlineForm("Minh", "masson@gmail.com", true);
 
-  await navigateTo.FormLayoutsPage();
-  await formLayoutsPage.inputFormUsingGridsWithCredentials(
-    "test@gamil.com",
-    "myPassword",
-    "Option 1"
-  );
-  await formLayoutsPage.inputFormUsingInlineForm(
-    "Minh",
-    "masson@gmail.com",
-    true
-  );
-
-  navigateTo.datePickerPage();
-  await onDatePickerPage.selectCommonDatePickerDateFromToday(6);
-  await onDatePickerPage.selectDatePickerWithRangeFromToday(4, 23);
+  await pm.navigateTo().datePickerPage();
+  await pm.onDatePickerPage().selectCommonDatePickerDateFromToday(6);
+  await pm.onDatePickerPage().selectDatePickerWithRangeFromToday(4, 23);
 });
