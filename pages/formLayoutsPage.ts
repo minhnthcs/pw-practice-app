@@ -1,10 +1,9 @@
 import { Page } from "@playwright/test";
+import { HelperBase } from "./utils/helperBase";
 
-export class FormLayoutsPage {
-  private readonly page: Page;
-
+export class FormLayoutsPage extends HelperBase {
   constructor(page: Page) {
-    this.page = page;
+    super(page);
   }
 
   async inputFormUsingGridsWithCredentials(
@@ -25,6 +24,7 @@ export class FormLayoutsPage {
     await usingTheGridEmailInput
       .getByRole("button", { name: "Sign in" })
       .click();
+    // await this.waitForNumberOfSeconds(2);
   }
 
   async inputFormUsingInlineForm(
