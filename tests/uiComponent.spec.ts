@@ -1,12 +1,15 @@
 import { DatePipe } from "@angular/common";
 import { test, expect } from "@playwright/test";
 
+test.describe.configure({ mode: "parallel" }); // to run only this spec in parallel
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:4200");
 });
 
+// or set parallel here
 test.describe("Form Layouts page", () => {
   test.describe.configure({ retries: 2 });
+  test.describe.configure({ mode: "serial" });
   test.beforeEach(async ({ page }) => {
     // await page.getByText('Forms').click()
     // await page.getByText('Form Layouts').click()
