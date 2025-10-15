@@ -28,9 +28,17 @@ test("method parameterized", async ({ page }) => {
       "myPassword",
       "Option 1"
     );
+  await page.screenshot({ path: "screenshot/formsLayoutsPage.png" }); // to screenshot whole page
+  const buffer = await page.screenshot(); // to send out to other resource
+  console.log(buffer.toString("base64"));
   await pm
     .onFormLayoutsPage()
     .inputFormUsingInlineForm(randomFullName, randomEmail, true);
+
+  await page
+    .locator("nb-card")
+    .filter({ hasText: "Inline form" })
+    .screenshot({ path: "screenshot/inlineForm.png" }); // to screenshot a web element
 
   // await pm.navigateTo().datePickerPage();
   // await pm.onDatePickerPage().selectCommonDatePickerDateFromToday(6);

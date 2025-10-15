@@ -37,6 +37,10 @@ export default defineConfig({
     trace: "on-first-retry",
     // actionTimeout: 5000,
     navigationTimeout: 5000,
+    video: {
+      mode: "on",
+      size: { width: 1920, height: 1080 },
+    }, // video record on each test run, but should run the test using command line, not from test plugin of vscode
   },
 
   /* Configure projects for major browsers */
