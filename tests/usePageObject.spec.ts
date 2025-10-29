@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pages/utils/pageManager";
 import { faker } from "@faker-js/faker";
 test.beforeEach(async ({ page }) => {
-  await page.goto("http://localhost:4200");
+  await page.goto("/");
 });
 
 test("navigate to Form Layout", async ({ page }) => {
