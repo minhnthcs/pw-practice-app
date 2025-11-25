@@ -30,7 +30,7 @@ test("method parameterized", async ({ page }) => {
     );
   await page.screenshot({ path: "screenshot/formsLayoutsPage.png" }); // to screenshot whole page
   const buffer = await page.screenshot(); // to send out to other resource
-  console.log(buffer.toString("base64"));
+  // console.log(buffer.toString("base64"));
   await pm
     .onFormLayoutsPage()
     .inputFormUsingInlineForm(randomFullName, randomEmail, true);

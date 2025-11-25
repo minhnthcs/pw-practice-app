@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 // or set parallel here
 test.describe("Form Layouts page", () => {
   test.describe.configure({ retries: 2 });
-  test.describe.configure({ mode: "serial" });
+  test.describe.configure({ mode: "parallel" });
   test.beforeEach(async ({ page }) => {
     // await page.getByText('Forms').click()
     // await page.getByText('Form Layouts').click()
