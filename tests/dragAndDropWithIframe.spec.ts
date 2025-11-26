@@ -5,9 +5,7 @@ test("drag and drop with iframe", async ({ page, globalsQaURL }) => {
   await page.goto(globalsQaURL);
 
   const frame = await page.frameLocator('[rel-title="Photo Manager"] iframe');
-  await frame
-    .locator("li", { hasText: "High Tatras 2" })
-    .dragTo(frame.locator("#trash"));
+  await frame.locator("li", { hasText: "High Tatras 2" }).dragTo(frame.locator("#trash"));
 
   // more presice control
   await frame.locator("li", { hasText: "High Tatras 4" }).hover();
@@ -15,8 +13,5 @@ test("drag and drop with iframe", async ({ page, globalsQaURL }) => {
   await frame.locator("#trash").hover();
   await page.mouse.up();
 
-  await expect(frame.locator("#trash li h5")).toHaveText([
-    "High Tatras 2",
-    "High Tatras 4",
-  ]);
+  await expect(frame.locator("#trash li h5")).toHaveText(["High Tatras 2", "High Tatras 4"]);
 });
